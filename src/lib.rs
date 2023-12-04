@@ -1,4 +1,4 @@
-mod allocator;
+pub mod allocator;
 
 use std::{
     collections::BTreeMap,
@@ -9,13 +9,14 @@ use cesium_libmimalloc_sys::heap::mi_heap_new;
 
 use crate::allocator::Allocator;
 
+/// A pool of general allocators.
 pub struct AllocatorPool {
     lowest_id: u32,
     heaps: BTreeMap<u32, Arc<Allocator>>,
 }
 
-/// A pool of general allocators.
 impl AllocatorPool {
+    /// Create a new pool for allocators.
     pub fn new() -> Self {
         AllocatorPool {
             lowest_id: 0,
@@ -40,7 +41,7 @@ impl AllocatorPool {
         match self.heaps.get(&id) {
             | None => match create {
                 | None => None,
-                | Some(v) => Some(self.new_allocator()),
+                | Some(_) => Some(self.new_allocator()),
             },
             | Some(v) => Some(v.clone()),
         }
