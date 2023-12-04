@@ -1,0 +1,32 @@
+[package]
+name = "cesium-libmimalloc-sys"
+description = "FFI wrapper for Microsoft's mimalloc allocator"
+authors = ["Sienna Lloyd <sienna@r3t.io>", "Cesium Allocator Maintainers"]
+version = "2.1.2"
+homepage = "https://github.com/shieldmaidens/cesium-allocator"
+license = "GPL-3.0-only"
+license-file = "../LICENSE.md"
+edition = "2021"
+
+exclude = [
+    "/c_src/mimalloc/bin",
+    "/c_src/mimalloc/cmake",
+    "/c_src/mimalloc/doc",
+    "/c_src/mimalloc/docs",
+    "/c_src/mimalloc/ide",
+    "/c_src/mimalloc/test",
+]
+
+[features]
+default = []
+secure = []
+debug = []
+debug_in_debug = []
+override = []
+local_dynamic_tls = []
+
+[dependencies]
+libc = "0.2"
+
+[build-dependencies]
+cc = "1.0"
